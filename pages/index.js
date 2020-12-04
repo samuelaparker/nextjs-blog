@@ -12,8 +12,9 @@ export async function getStaticProps() {
     }
   }
 }
-//test
+
 export default function Home({ allPostsData }) {
+  
   return (
     <Layout home>
       <Head>
