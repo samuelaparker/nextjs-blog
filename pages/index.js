@@ -3,6 +3,7 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import { getSortedPostsData } from '../lib/posts'
+import Date from '../components/date'
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData()
@@ -14,7 +15,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ allPostsData }) {
-  
+
   return (
     <Layout home>
       <Head>
@@ -32,17 +33,19 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
+              <Link href={`/posts/${id}`}>
+                <a>{title}</a>
+              </Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>
       </section>
       <h1 className="title">
-        Read <Link href="/posts/first-post"><a> Next.js!</a></Link>
+        Read <Link href="https://nextjs.org/learn/basics/create-nextjs-app?utm_source=next-site&utm_medium=nav-cta&utm_campaign=next-website-post"><a> Next.js!</a></Link>
       </h1>
     </Layout>
   )
